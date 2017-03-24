@@ -1,6 +1,7 @@
 package com.example.vidish.attendancemanager;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -36,6 +37,9 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                         .setSmallIcon(R.drawable.ic_done_all_black_24dp)
                         .setContentTitle("Attendance Manager")
                         .setAutoCancel(true)
+                        .setOngoing(true)
+                        .setPriority(Notification.PRIORITY_HIGH)
+                        .setVibrate(new long[0])
                         .addAction(R.drawable.ic_account_box_black_24dp,"Direct Login",loginIntent)
                         .setContentText("Your Attendance has been updated");
 
@@ -52,9 +56,9 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        calendar.set(Calendar.MINUTE, 30);
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 5 * 60 * 1000 , alarmIntent);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 25);
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60 * 1000 , alarmIntent);
 
     }
 
